@@ -1,15 +1,26 @@
 @extends('layouts.app')
 @section('content')
-    <div class="d-flex justify-content-center align-items-center p-5"
+    <div class="d-flex justify-content-center align-items-center p-5 mb-5"
         style="display: block;justify-content: center; align-items: center; min-height: 100vh; background: linear-gradient(to right,rgb(214, 212, 216),rgb(175, 181, 193));">
-        <h2 class="mb-4 text-center text-dark fw-bold">Job Listing</h2>
+        <!-- <a href="{{ route('jobs.create') }}" class="btn btn-primary mb-3">Post a Job</a> -->
+        <div class="d-flex mb-4" style="display:flex">
+            <h2 class="mb-4 text-center text-dark fw-bold" style="margin-right: 15px;">Job Listing</h2>
+            @if(auth()->check())
+                @if (auth()->user()->role == 'poster')
 
+                    <a href="{{ route('jobs.create') }}" class="btn btn-sm btn-outline-primary rounded-pill"
+                        style="background-color:rgba(164, 177, 228, 0.93); padding: 5px; height: fit-content; margin-top: auto;">
+                        Post a Job
+                    </a>
+                @endif
+            @endif
+        </div>
 
 
         <div class="list-group" style="display:block;justify-content:center ;align-items:center; padding-left: 50px;">
             @foreach($jobs as $job)
                 <div class="card shadow-lg border-0 rounded-4 w-100"
-                    style="display: block;max-width: 550px;width: 50%; background-color: #ffffffee; padding: 30px;">
+                    style="display: block;max-width: 550px;width: 50%; background-color: #ffffffee; padding: 20px;">
                     <li class="list-group-item">
                         <a href="{{ route('jobs.show', $job) }}">{{ $job->title }}</a>
                     </li>
@@ -36,11 +47,7 @@
 
                 </div>
             @endforeach
-            @if(auth()->check())
-                @if (auth()->user()->role)
-                    <a href="{{ route('jobs.create') }}" class="btn btn-primary mb-3">Post a Job</a>
-                @endif
-            @endif
+
         </div>
     </div>
 @endsection

@@ -41,14 +41,14 @@ Route::middleware(['role:poster'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::resource('jobs', JobController::class); 
-    Route::resource('jobs', JobController::class); // Resource routes for job CRUD operations
+    Route::resource('jobs', JobController::class);
+    // Resource routes for job CRUD operations
     // Route::post('/jobs', [JobController::class, 'store'])->name('jobs.store');
 
     Route::get('/jobs/create', [JobController::class, 'create'])->name('jobs.create');
     Route::middleware(['auth'])->get('/jobs/create', [JobController::class, 'create'])->name('jobs.create');
-    
-    
+
+
     Route::get('/jobs/create', [JobController::class, 'create'])->name('jobs.create');
 
     Route::get('/jobs/{job}/edit', [JobController::class, 'edit'])->name('jobs.edit');
