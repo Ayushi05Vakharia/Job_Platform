@@ -27,7 +27,7 @@ class JobSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
                 'user_id' => $user->id,
-                'posted_by' => $user->id,
+                'posted_by' => $user->name,
             ],
             [
                 'title' => 'Electrician Required',
@@ -35,7 +35,7 @@ class JobSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
                 'user_id' => $user->id,
-                'posted_by' => $user->id,
+                'posted_by' => $user->name,
             ],
             [
                 'title' => 'Gardener Job',
@@ -43,7 +43,7 @@ class JobSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
                 'user_id' => $user->id,
-                'posted_by' => $user->id,
+                'posted_by' => $user->name,
             ],
         ];
 

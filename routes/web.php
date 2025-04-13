@@ -31,25 +31,20 @@ Auth::routes();
 // Authenticated users can access jobs and interest-related actions
 
 
-Route::middleware(['role:poster'])->group(function () {
-    Route::get('/jobs/create', [JobController::class, 'create'])->name('jobs.create');
-    Route::post('/jobs', [JobController::class, 'store'])->name('jobs.store');
-});
-
-
-
 
 Route::middleware(['auth'])->group(function () {
-
+    Route::middleware(['auth'])->group(function () {
+        Route::resource('jobs', JobController::class);
+    });
+    Route::get('/jobs/create', [JobController::class, 'create'])->name('jobs.create');
     Route::resource('jobs', JobController::class);
     // Resource routes for job CRUD operations
     // Route::post('/jobs', [JobController::class, 'store'])->name('jobs.store');
 
-    Route::get('/jobs/create', [JobController::class, 'create'])->name('jobs.create');
-    Route::middleware(['auth'])->get('/jobs/create', [JobController::class, 'create'])->name('jobs.create');
+
+    // Route::middleware(['auth'])->get('/jobs/create', [JobController::class, 'create'])->name('jobs.create');
 
 
-    Route::get('/jobs/create', [JobController::class, 'create'])->name('jobs.create');
 
     Route::get('/jobs/{job}/edit', [JobController::class, 'edit'])->name('jobs.edit');
 
@@ -67,4 +62,6 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+

@@ -9,7 +9,7 @@ class AddPostedByToJobsTable extends Migration
     {
         Schema::table('jobs', function (Blueprint $table) {
             if (!Schema::hasColumn('jobs', 'posted_by')) {
-                $table->unsignedBigInteger('posted_by')->after('description');
+                $table->string('posted_by')->after('description');
             }
         });
     }

@@ -16,7 +16,7 @@ return new class extends Migration
         $table->string('title');
         $table->text('description')->nullable();
         $table->foreignId('user_id')->constrained()->onDelete('cascade');
-        $table->unsignedBigInteger('posted_by')->nullable();  // Add this line for 'posted_by' field
+        $table->string('posted_by')->nullable();  // Add this line for 'posted_by' field
         $table->timestamps();
         });
         

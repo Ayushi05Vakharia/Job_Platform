@@ -1,17 +1,32 @@
 <?php $__env->startSection('content'); ?>
-    <div class="d-flex justify-content-center align-items-center p-5"
+    <div class="d-flex justify-content-center align-items-center p-5 mb-5"
         style="display: block;justify-content: center; align-items: center; min-height: 100vh; background: linear-gradient(to right,rgb(214, 212, 216),rgb(175, 181, 193));">
-        <h2 class="mb-4 text-center text-dark fw-bold">Job Listing</h2>
+        <!-- <a href="<?php echo e(route('jobs.create')); ?>" class="btn btn-primary mb-3">Post a Job</a> -->
+        <div class="d-flex mb-4" style="display:flex">
+            <h2 class="mb-4 text-center text-dark fw-bold" style="margin-right: 15px;">Job Listing</h2>
+            <?php if(auth()->check()): ?>
+                <?php if(auth()->user()->role == 'poster'): ?>
 
+                    <a href="<?php echo e(route('jobs.create')); ?>" class="btn btn-sm btn-outline-primary rounded-pill"
+                        style="background-color:rgba(164, 177, 228, 0.93); padding: 5px; height: fit-content; margin-top: auto;">
+                        Post a Job
+                    </a>
+                <?php endif; ?>
+            <?php endif; ?>
+        </div>
 
 
         <div class="list-group" style="display:block;justify-content:center ;align-items:center; padding-left: 50px;">
             <?php $__currentLoopData = $jobs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $job): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div class="card shadow-lg border-0 rounded-4 w-100"
-                    style="display: block;max-width: 550px;width: 50%; background-color: #ffffffee; padding: 30px;">
-                    <li class="list-group-item">
+                    style="display: block;max-width: 550px;width: 50%; background-color: #ffffffee; padding: 20px;">
+                    <div style="display: flex; justify-content: space-between;">
+                    <li class="d-flex list-group-item">
                         <a href="<?php echo e(route('jobs.show', $job)); ?>"><?php echo e($job->title); ?></a>
+                        <p>Posted by : <?php echo e($job->posted_by); ?></p>
                     </li>
+                    <p>Created at : <?php echo e($job->created_at->format('d M Y')); ?></p>
+                    </div>
                     <!-- <p><?php echo e(auth()->check()); ?></p> -->
                     <?php if(auth()->check()): ?>
                         <?php if(auth()->user()->role == 'poster'): ?>
@@ -35,11 +50,7 @@
 
                 </div>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-            <?php if(auth()->check()): ?>
-                <?php if(auth()->user()->role): ?>
-                    <a href="<?php echo e(route('jobs.create')); ?>" class="btn btn-primary mb-3">Post a Job</a>
-                <?php endif; ?>
-            <?php endif; ?>
+
         </div>
     </div>
 <?php $__env->stopSection(); ?>

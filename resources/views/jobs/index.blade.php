@@ -21,9 +21,13 @@
             @foreach($jobs as $job)
                 <div class="card shadow-lg border-0 rounded-4 w-100"
                     style="display: block;max-width: 550px;width: 50%; background-color: #ffffffee; padding: 20px;">
-                    <li class="list-group-item">
+                    <div style="display: flex; justify-content: space-between;">
+                    <li class="d-flex list-group-item">
                         <a href="{{ route('jobs.show', $job) }}">{{ $job->title }}</a>
+                        <p>Posted by : {{ $job->posted_by }}</p>
                     </li>
+                    <p>Created at : {{ $job->created_at->format('d M Y') }}</p>
+                    </div>
                     <!-- <p>{{auth()->check()  }}</p> -->
                     @if(auth()->check())
                         @if (auth()->user()->role == 'poster')

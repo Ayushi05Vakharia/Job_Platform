@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('jobs', function (Blueprint $table) {
-            $table->unsignedBigInteger('posted_by')->nullable()->change();
+            $table->string('posted_by')->nullable()->change();
         });
     }
 

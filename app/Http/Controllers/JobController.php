@@ -41,7 +41,7 @@ class JobController extends Controller
         $job->title = $request->input('title');
         $job->description = $request->input('description', 'No description provided');
         $job->user_id = auth()->id(); // Set the user_id
-        $job->posted_by = auth()->id(); // Set posted_by to the user who is creating the job
+        $job->posted_by = auth()->user()->name; // Set posted_by to the user who is creating the job
         $job->save();
 
         // Redirect after successful post
