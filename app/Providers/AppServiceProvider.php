@@ -17,6 +17,9 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
+    protected $policies = [
+        \App\Models\Job::class => \App\Policies\JobPolicy::class,
+    ];
     public function boot(): void
     {
         //

@@ -6,21 +6,26 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
+use Spatie\Permission\Traits\HasRoles;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
+    use HasRoles;
     use HasFactory, Notifiable;
 
+   
     /**
      * The attributes that are mass assignable.
      *
-     * @var list<string>
+     * @var list<string>`
      */
     protected $fillable = [
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -45,4 +50,17 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function jobs()
+{
+    Role::create(['name' => 'poster']);
+    Permission::create(['name' => 'create job']);
+    return $this->hasMany(Job::class);
+}
+
+public function interestedJobs()
+{
+    return $this->belongsToMany(Job::class, 'job_user');
+}
+
 }
