@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Job;
 use Illuminate\Support\Facades\Auth;
+use League\CommonMark\Extension\Attributes\Node\Attributes;
 
 class JobController extends Controller
 {
@@ -24,9 +25,9 @@ class JobController extends Controller
         // $jobs = Job::with('interests')->get();  // Eager load the interests for each job
         // return view('jobs.index', compact('jobs'));
 
-         // Retrieve jobs and pass them to the view
-    $jobs = Job::all();
-    return view('jobs.index', compact('jobs'));
+        // Retrieve jobs and pass them to the view
+        $jobs = Job::all();
+        return view('jobs.index', compact('jobs'));
     }
 
     public function create()
@@ -35,7 +36,7 @@ class JobController extends Controller
         return view('jobs.create');
     }
 
-  
+
     // }
 
     public function store(Request $request)
@@ -65,12 +66,16 @@ class JobController extends Controller
     public function edit(Job $job) // Use the Job model directly
     {
         // Check if the authenticated user is the owner of the job
-        if ($job->user_id !== auth()->id()) {
-            return redirect()->route('jobs.index')->with('error', 'You do not have permission to edit this job.');
+        if (auth()->check()) {
+            $user = auth()->user();
+            // dd($user->role == 'poster');
+            if ($user->role == 'poster') {
+                return view('jobs.edit', compact('job'));
+            } else {
+                // Return the view with the job data
+                return redirect()->route('jobs.index')->with('error', 'You do not have permission to edit this job.');
+            }
         }
-
-        // Return the view with the job data
-        return view('jobs.edit', compact('job'));
     }
 
     public function update(Request $request, $id)

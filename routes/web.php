@@ -51,12 +51,13 @@ Route::middleware(['auth'])->group(function () {
     
     Route::get('/jobs/create', [JobController::class, 'create'])->name('jobs.create');
 
+    Route::get('/jobs/{job}/edit', [JobController::class, 'edit'])->name('jobs.edit');
 
     Route::post('/jobs', [JobController::class, 'store'])->name('jobs.store');
     // Route::get('/jobs/create', [JobController::class, 'create'])->middleware('role:poster');
 
     // Display the edit form
-    Route::middleware(['auth'])->get('/jobs/{job}/edit', [JobController::class, 'edit'])->name('jobs.edit');
+    // Route::middleware(['auth'])->get('/jobs/{job}/edit', [JobController::class, 'edit'])->name('jobs.edit');
 
     // Update the job details
     Route::middleware(['auth'])->put('/jobs/{job}', [JobController::class, 'update'])->name('jobs.update');

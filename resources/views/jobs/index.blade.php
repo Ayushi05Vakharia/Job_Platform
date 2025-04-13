@@ -15,7 +15,7 @@
                     </li>
                     <!-- <p>{{auth()->check()  }}</p> -->
                     @if(auth()->check())
-                        @if (auth()->user()->role)
+                        @if (auth()->user()->role == 'poster')
                             <div class="d-flex" style="display: flex;">
 
                                 <form action="{{ route('jobs.destroy', $job->id) }}" method="POST"
@@ -25,7 +25,7 @@
                                     <button type="submit" class="btn btn-primary w-full rounded-pill py-2 mt-4 text-blue-500 fw-bold"
                                         style="background-color:rgba(164, 177, 228, 0.93); padding: 5px;">Delete</button>
                                 </form>
-                                <a href="{{ route('jobs.update', $job->id) }}" class="btn btn-sm btn-outline-primary rounded-pill"
+                                <a href="{{ route('jobs.edit', $job->id) }}" class="btn btn-sm btn-outline-primary rounded-pill"
                                     style="background-color:rgba(164, 177, 228, 0.93); padding: 5px; height: fit-content; margin-top: auto;">
                                     Edit
                                 </a>
