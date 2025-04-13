@@ -38,13 +38,21 @@ unset($__errorArgs, $__bag); ?>
                 </div>
 
                 <!-- Login Button -->
-                <button type="submit"
-                    class="btn btn-primary w-full rounded-pill py-2 mt-4 text-blue-500 fw-bold"
-                    style="background-color:rgba(164, 177, 228, 0.93);"
-                    >Login</button>
-                <!-- Forgot Password Link -->
-                <div class="text-center mt-2">
-                    <a href="<?php echo e(route('password.request')); ?>" class="text-blue-500 hover:text-blue-700">Forgot Password?</a>
+                <button type="submit" class="btn btn-primary w-full rounded-pill py-2 mt-4 mb-4 text-blue-500 fw-bold"
+                    style="background-color:rgba(164, 177, 228, 0.93);">Login</button>
+                <!-- Other Link -->
+                <div style="display: flex; justify-content: space-between;">
+                    <div class="text-center mt-2">
+                        <a href="<?php echo e(route('password.request')); ?>" class="text-blue-500 hover:text-blue-700">Forgot
+                            Password?</a>
+                    </div>
+
+                    <div class="text-center mt-2">
+                        New User ->
+                        <a href="<?php echo e(route('register')); ?>"
+                            class="btn btn-primary w-full rounded-pill py-2 mt-4 text-blue-500 fw-bold"
+                            style="background-color:rgba(164, 177, 228, 0.93); padding:10px">Register</a>
+                    </div>
                 </div>
             </form>
         </div>
