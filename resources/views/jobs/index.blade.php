@@ -1,24 +1,46 @@
 @extends('layouts.app')
 @section('content')
-<div class="container">
-    <h1>Job Listings</h1>
-    @can('create', App\Models\Job::class)
-        <a href="{{ route('jobs.create') }}" class="btn btn-primary mb-3">Post a Job</a>
-    @endcan
-    <ul class="list-group">
-        @foreach($jobs as $job)
-            <li class="list-group-item">
-                <a href="{{ route('jobs.show', $job) }}">{{ $job->title }}</a>
-            </li>
-            @if ($job->user_id === auth()->id())
-                    <form action="{{ route('jobs.destroy', $job->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this job?');">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
-                @endif
-        @endforeach
-    </ul>
-</div>
-@endsection
+    <div class="d-flex justify-content-center align-items-center p-5"
+        style="display: block;justify-content: center; align-items: center; min-height: 100vh; background: linear-gradient(to right,rgb(214, 212, 216),rgb(175, 181, 193));">
+        <h2 class="mb-4 text-center text-dark fw-bold">Job Listing</h2>
 
+
+
+        <div class="list-group" style="display:block;justify-content:center ;align-items:center; padding-left: 50px;">
+            @foreach($jobs as $job)
+                <div class="card shadow-lg border-0 rounded-4 w-100"
+                    style="display: block;max-width: 550px;width: 50%; background-color: #ffffffee; padding: 30px;">
+                    <li class="list-group-item">
+                        <a href="{{ route('jobs.show', $job) }}">{{ $job->title }}</a>
+                    </li>
+                    <!-- <p>{{auth()->check()  }}</p> -->
+                    @if(auth()->check())
+                        @if (auth()->user()->role)
+                            <div class="d-flex" style="display: flex;">
+
+                                <form action="{{ route('jobs.destroy', $job->id) }}" method="POST"
+                                    onsubmit="return confirm('Are you sure you want to delete this job?');" style="margin-right: 8px;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-primary w-full rounded-pill py-2 mt-4 text-blue-500 fw-bold"
+                                        style="background-color:rgba(164, 177, 228, 0.93); padding: 5px;">Delete</button>
+                                </form>
+                                <a href="{{ route('jobs.update', $job->id) }}" class="btn btn-sm btn-outline-primary rounded-pill"
+                                    style="background-color:rgba(164, 177, 228, 0.93); padding: 5px; height: fit-content; margin-top: auto;">
+                                    Edit
+                                </a>
+
+                            </div>
+                        @endif
+                    @endif
+
+                </div>
+            @endforeach
+            @if(auth()->check())
+                @if (auth()->user()->role)
+                    <a href="{{ route('jobs.create') }}" class="btn btn-primary mb-3">Post a Job</a>
+                @endif
+            @endif
+        </div>
+    </div>
+@endsection
