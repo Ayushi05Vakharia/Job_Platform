@@ -13,11 +13,16 @@
             <h1><?php echo e($job->title); ?></h1>
             <p><?php echo e($job->description); ?></p>
             <?php if(auth()->guard()->check()): ?>
-                <form method="POST" action="<?php echo e(route('jobs.interest', $job)); ?>">
+                <form method="POST" action="<?php echo e(route('jobs.interest')); ?>">
                     <?php echo csrf_field(); ?>
+                    <input type="hidden" name="job_id" value="<?php echo e($job->id); ?>">
+                    <?php if(auth()->user()->interestedJobs->contains($job->id)): ?>
+                        <button type="submit" disabled>Interested</button>
+                    <?php else: ?>
+                        <button type="submit" class="btn btn-primary w-full rounded-pill py-2 mt-4 mb-4 text-blue-500 fw-bold"
+                            style="background-color:rgba(164, 177, 228, 0.93);">I'm Interested</button>
+                    <?php endif; ?>
 
-                    <button type="submit" class="btn btn-primary w-full rounded-pill py-2 mt-4 mb-4 text-blue-500 fw-bold"
-                        style="background-color:rgba(164, 177, 228, 0.93);">I'm Interested</button>
                 </form>
 
 

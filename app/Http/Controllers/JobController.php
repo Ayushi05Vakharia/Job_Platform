@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Job;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use League\CommonMark\Extension\Attributes\Node\Attributes;
 
@@ -19,8 +20,13 @@ class JobController extends Controller
     public function index()
     {
         // Retrieve jobs and pass them to the view
-        $jobs = Job::all();
-        return view('jobs.index', compact('jobs'));
+        $jobs = Job::with('interestedUsers')
+        ->where('created_at', '>=', Carbon::now()->subMonths(2))
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $user = auth()->user()->load('interestedJobs');
+        return view('jobs.index', compact('jobs', 'user'));
     }
 
     public function create()

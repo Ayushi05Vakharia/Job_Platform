@@ -18,13 +18,9 @@ class Job extends Model
         return $this->belongsTo(User::class, 'posted_by');
     }
 
+
     public function interestedUsers()
     {
-        return $this->belongsToMany(User::class, 'job_user');
+        return $this->belongsToMany(User::class, 'job_user_interest');
     }
-    public function interests()
-{
-    return $this->hasMany(Interest::class);  // Adjust to fit your actual relationship
-}
-
 }

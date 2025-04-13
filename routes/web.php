@@ -56,8 +56,9 @@ Route::middleware(['auth'])->group(function () {
 
     // Update the job details
     Route::middleware(['auth'])->put('/jobs/{job}', [JobController::class, 'update'])->name('jobs.update');
-
-    Route::post('/jobs/{job}/interest', [InterestController::class, 'store'])->name('jobs.interest');
+    // Route::post('/interest', [InterestController::class, 'store'])->middleware('auth');
+    Route::post('/interest', [InterestController::class, 'store'])->name('jobs.interest');
+    // Route::post('/jobs/{job}/interest', [InterestController::class, 'store'])->name('jobs.interest');
     Route::middleware(['auth'])->delete('/jobs/{job}', [JobController::class, 'destroy'])->name('jobs.destroy');
 
 });
