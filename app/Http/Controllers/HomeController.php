@@ -24,6 +24,6 @@ class HomeController extends Controller
     public function index()
     {
         $jobs = Job::all(); 
-        return view('dashboard', compact('jobs'));
+        return view('jobs.index', compact('jobs'));
     }
 }
