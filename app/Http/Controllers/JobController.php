@@ -9,22 +9,15 @@ use League\CommonMark\Extension\Attributes\Node\Attributes;
 
 class JobController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-        $this->middleware('role:poster')->only(['create', 'store']);
-    }
-
-    // public function index()
+    // public function __construct()
     // {
-    //     $jobs = Job::with('interests')->latest()->get();
-    //     return view('jobs.index', compact('jobs'));
+    //     $this->middleware('auth');
+    //     $this->middleware('role:poster')->only(['create', 'store']);
     // }
+
+
     public function index()
     {
-        // $jobs = Job::with('interests')->get();  // Eager load the interests for each job
-        // return view('jobs.index', compact('jobs'));
-
         // Retrieve jobs and pass them to the view
         $jobs = Job::all();
         return view('jobs.index', compact('jobs'));
@@ -35,9 +28,6 @@ class JobController extends Controller
         // $this->authorize('create', Job::class);
         return view('jobs.create');
     }
-
-
-    // }
 
     public function store(Request $request)
     {
@@ -106,15 +96,19 @@ class JobController extends Controller
     public function destroy(Job $job)
     {
         // Ensure the user is the owner of the job
-        if ($job->user_id !== auth()->id()) {
-            return redirect()->route('jobs.index')->with('error', 'You do not have permission to delete this job.');
+        if (auth()->check()) {
+            $user = auth()->user();
+            if (@$user->role != 'poster') {
+                return redirect()->route('jobs.index')->with('error', 'You do not have permission to delete this job.');
+            } else {
+
+                // Delete the job
+                $job->delete();
+
+                // Redirect to jobs index with success message
+                return redirect()->route('jobs.index')->with('success', 'Job deleted successfully!');
+            }
         }
-
-        // Delete the job
-        $job->delete();
-
-        // Redirect to jobs index with success message
-        return redirect()->route('jobs.index')->with('success', 'Job deleted successfully!');
     }
 
 }
