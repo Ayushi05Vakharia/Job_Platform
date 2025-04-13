@@ -82,9 +82,9 @@ class JobController extends Controller
     {
         // Find the job by ID
         $job = Job::findOrFail($id);
-
+        $user = auth()->user();
         // Check if the user is authorized to edit the job
-        if ($job->user_id !== auth()->id()) {
+        if ($user->role != 'poster') {
             return redirect()->route('jobs.index')->with('error', 'You do not have permission to update this job.');
         }
 

@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('content'); ?>
 <div class="container">
     <h1><?php echo e($job->title); ?></h1>
