@@ -23,7 +23,7 @@
 
             <!-- Settings Dropdown -->
             @if(auth()->check())
-                        @if (auth()->user()->role == 'poster')
+                       
             <form method="POST" action="{{ route('logout') }}" style="display: flex; align-items: center; font-weight: bold;">
                             @csrf
 
@@ -33,7 +33,7 @@
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
                         </form>  
-                        @endif
+                        
                         @endif        
         </div>
     </div>

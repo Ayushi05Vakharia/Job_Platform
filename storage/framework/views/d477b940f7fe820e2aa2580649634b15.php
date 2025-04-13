@@ -61,7 +61,7 @@
 
             <!-- Settings Dropdown -->
             <?php if(auth()->check()): ?>
-                        <?php if(auth()->user()->role == 'poster'): ?>
+                       
             <form method="POST" action="<?php echo e(route('logout')); ?>" style="display: flex; align-items: center; font-weight: bold;">
                             <?php echo csrf_field(); ?>
 
@@ -90,7 +90,7 @@
 <?php unset($__componentOriginal68cb1971a2b92c9735f83359058f7108); ?>
 <?php endif; ?>
                         </form>  
-                        <?php endif; ?>
+                        
                         <?php endif; ?>        
         </div>
     </div>
