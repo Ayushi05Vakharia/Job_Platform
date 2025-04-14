@@ -6,7 +6,7 @@
         <div class="d-flex mb-4" style="display:flex">
             <h2 class="mb-4 text-center text-dark fw-bold" style="margin-right: 15px;">Job Listing</h2>
             @if(auth()->check())
-                @if (auth()->user()->role == 'poster')
+                @if (auth()->user()->role === 'poster')
 
                     <a href="{{ route('jobs.create') }}" class="btn btn-sm btn-outline-primary rounded-pill"
                         style="background-color:rgba(164, 177, 228, 0.93); padding: 5px; height: fit-content; margin-top: auto;">

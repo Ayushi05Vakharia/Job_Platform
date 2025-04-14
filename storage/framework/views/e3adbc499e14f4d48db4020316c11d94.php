@@ -17,29 +17,18 @@
 
                 <div class="form-group mb-2" style="display: flex; justify-content: space-between;">
                     <label class="fw-semibold text-gray-800"><i class="bi bi-envelope-at-fill me-2"></i>Title</label>
-                    <input type="text" name="title" class="form-control rounded-pill px-4 py-2"
-                         required>
+                    <input type="text" name="title" class="form-control rounded-pill px-4 py-2" required>
 
                 </div>
 
                 <div class="form-group mb-2" style="display: flex; justify-content: space-between;">
                     <label class="fw-semibold text-gray-800"><i class="bi bi-envelope-at-fill me-2"></i>Description</label>
-                    <textarea name="description" class="form-control rounded-pill px-4 py-2" rows="5"
-                         required></textarea>
+                    <textarea name="description" class="form-control rounded-pill px-4 py-2" rows="5" required></textarea>
 
                 </div>
 
-
-                <!-- <div class="mb-3">
-                    <label class="form-label fw-semibold">Title</label>
-                    <input type="text" name="title" class="form-control" required>
-                </div> -->
-                <!-- <div class="mb-3">
-                    <label class="form-label fw-semibold">Description</label>
-                    <textarea name="description" class="form-control" rows="5" required></textarea>
-                </div> -->
                 <button type="submit" class="btn btn-primary w-full rounded-pill py-2 mt-4 text-blue-500 fw-bold"
-                style="background-color:rgba(164, 177, 228, 0.93);">Submit Job</button>
+                    style="background-color:rgba(164, 177, 228, 0.93);">Submit Job</button>
                 <!-- <button type="submit" class="btn btn-primary w-100 rounded-pill">Submit Job</button> -->
             </form>
         </div>
