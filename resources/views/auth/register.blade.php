@@ -46,7 +46,8 @@
                 <div class="form-group mb-2" style="display: flex; justify-content: space-between;">
                     <label class="fw-semibold text-gray-800"><i class="bi bi-person-badge-fill me-2"></i>Role</label>
                     <input type="role" name="role" class="form-control rounded-pill px-4 py-2"
-                        placeholder="viewer or poster" value="{{ old('role') }}" required>
+                        oninput="this.value = this.value.toLowerCase();" placeholder="viewer or poster"
+                        value="{{ old('role') }}" required>
                     @error('role') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
                 </div>
 

@@ -5,7 +5,7 @@
         <div class="d-flex mb-4" style="display:flex">
             <h2 class="mb-4 text-center text-dark fw-bold" style="margin-right: 15px;">Job Listing</h2>
             <?php if(auth()->check()): ?>
-                <?php if(auth()->user()->role == 'poster'): ?>
+                <?php if(auth()->user()->role === 'poster'): ?>
 
                     <a href="<?php echo e(route('jobs.create')); ?>" class="btn btn-sm btn-outline-primary rounded-pill"
                         style="background-color:rgba(164, 177, 228, 0.93); padding: 5px; height: fit-content; margin-top: auto;">
